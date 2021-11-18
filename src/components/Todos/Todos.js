@@ -1,25 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './index.less';
 
-// antd
+// redux
+import { connect } from 'react-redux';
 
 // components
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoItem from './components/TodoItem/TodoItem';
 
-const Todos = () => {
-    const [todos, setTodos] = useState([
-        {
-            key: '12',
-            title: '1234',
-            descr: '2134',
-        },
-    ]);
-
-    const addTodo = () => {
-        setTodos(...todos);
-    };
-
+const Todos = ({ todoListData }) => {
     return (
         <div className="todos">
             <div className="todo__form">
@@ -27,9 +16,9 @@ const Todos = () => {
             </div>
 
             <div className="todos__body">
-                {todos.map((item) => (
+                {todoListData.todos.map((item) => (
                     <TodoItem
-                        key={item.key}
+                        key={item.id}
                         title={item.title}
                         descr={item.descr}
                     />
@@ -39,4 +28,10 @@ const Todos = () => {
     );
 };
 
-export default Todos;
+function mapStateToProps(state) {
+    return {
+        todoListData: state.todoListData,
+    };
+}
+
+export default connect(mapStateToProps)(Todos);

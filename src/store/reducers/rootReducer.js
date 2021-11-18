@@ -4,5 +4,5 @@ import { combineReducers } from 'redux';
 import todosReduser from './todos';
 
 export default combineReducers({
-    todos: todosReduser,
+    todoListData: todosReduser,
 });
